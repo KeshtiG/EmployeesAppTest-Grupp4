@@ -1,4 +1,5 @@
-﻿using EmployeesApp.Application.Employees.Interfaces;
+﻿using System.ComponentModel.DataAnnotations;
+using EmployeesApp.Application.Employees.Interfaces;
 using EmployeesApp.Domain.Entities;
 using EmployeesApp.Web.Controllers;
 using EmployeesApp.Web.Views.Employees;
@@ -66,6 +67,27 @@ namespace EmployeesApp.Web.Tests
             // Assert
             Assert.IsType<RedirectToActionResult>(result);
 
+        }
+
+        [Fact]
+        public void ValidateModelBinding()
+        {
+            // Arrange
+            var model = new CreateVM
+            {
+                Name = "Oliver",
+                Email = "oliver@example.com",
+                BotCheck = 4
+            };
+
+            var context = new ValidationContext(model);
+            var results = new List<ValidationResult>();
+
+            // Act
+            var isValid = Validator.TryValidateObject(model, context, results, validateAllProperties: true);
+
+            // Assert
+            Assert.True(isValid);
         }
     }
 }
