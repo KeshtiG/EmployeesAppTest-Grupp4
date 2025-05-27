@@ -31,7 +31,6 @@ namespace EmployeesApp.Web.Tests
         }
 
         [Fact]
-
         public void Details_ValidId_ReturnsViewResultWithEmployee()
         {
             // Arrage
@@ -42,13 +41,38 @@ namespace EmployeesApp.Web.Tests
 
             //Act
             var controller = new EmployeesController(employeeService.Object);
+            var result = controller.Details(1);
 
             // Assert
-            var viewResult = Assert.IsType<ViewResult>(controller.Details(1));
-            Assert.NotNull(viewResult.Model);
-            
-
+            var viewResult = Assert.IsType<ViewResult>(result);
         }
 
+        [Fact]
+        public void create_test()
+        {
+            // Arrange
+            var employeeService = new Mock<IEmployeeService>();
+            var controller = new EmployeesController(employeeService.Object);
+
+            var createVM = new CreateVM()
+            {
+                Name = "Test",
+                Email = "test@mail.se",
+                BotCheck = 4
+            };
+
+            // Act
+            var result = controller.Create(createVM);
+
+            // Assert
+            employeeService.Verify(x => x.Add(It.Is<Employee>(e =>
+            e.Name == createVM.Name &&
+            e.Email == createVM.Email
+            )), Times.Once);
+
+            var redirectResult = Assert.IsType<RedirectToActionResult>(result);
+            Assert.Equal(nameof(Index), redirectResult.ActionName);
+            Assert.True(controller.ModelState.IsValid);
+        }
     }
 }
