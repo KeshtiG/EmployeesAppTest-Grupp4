@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmployeesApp.Infrastructure
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmployeesApp.Terminal", "EmployeesApp.Terminal\EmployeesApp.Terminal.csproj", "{4DA0562D-772B-409B-B8FB-1D1CAC43E4F3}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmployeeApp.Application.Tests", "EmployeeApp.Application.Tests\EmployeeApp.Application.Tests.csproj", "{4637ED25-9137-45B7-9A17-A0BC4C0C3968}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{4DA0562D-772B-409B-B8FB-1D1CAC43E4F3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4DA0562D-772B-409B-B8FB-1D1CAC43E4F3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4DA0562D-772B-409B-B8FB-1D1CAC43E4F3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4637ED25-9137-45B7-9A17-A0BC4C0C3968}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4637ED25-9137-45B7-9A17-A0BC4C0C3968}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4637ED25-9137-45B7-9A17-A0BC4C0C3968}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4637ED25-9137-45B7-9A17-A0BC4C0C3968}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
