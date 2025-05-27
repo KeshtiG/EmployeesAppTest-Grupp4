@@ -1,4 +1,5 @@
-﻿using EmployeesApp.Application.Employees.Interfaces;
+﻿using System.ComponentModel.DataAnnotations;
+using EmployeesApp.Application.Employees.Interfaces;
 using EmployeesApp.Domain.Entities;
 using EmployeesApp.Web.Controllers;
 using EmployeesApp.Web.Views.Employees;
@@ -45,6 +46,7 @@ namespace EmployeesApp.Web.Tests
 
             // Assert
             var viewResult = Assert.IsType<ViewResult>(result);
+            Assert.NotNull(viewResult);
         }
 
         [Fact]
@@ -73,6 +75,47 @@ namespace EmployeesApp.Web.Tests
             var redirectResult = Assert.IsType<RedirectToActionResult>(result);
             Assert.Equal(nameof(Index), redirectResult.ActionName);
             Assert.True(controller.ModelState.IsValid);
+        }
+
+        [Fact]
+        public void Create_ValidModel_RedirectsToIndex()
+        {
+            // Arrange
+            var employeeService = new Mock<IEmployeeService>();
+            var controller = new EmployeesController(employeeService.Object);
+            var createVM = new CreateVM
+            {
+                Name = "Oliver",
+                Email = "oliver@example.com",
+                BotCheck = 0 
+            };
+
+            // Act
+            var result = controller.Create(createVM);
+
+            // Assert
+            Assert.IsType<RedirectToActionResult>(result);
+        }
+
+        [Fact]
+        public void ValidateModelBinding()
+        {
+            // Arrange
+            var model = new CreateVM
+            {
+                Name = "Oliver",
+                Email = "oliver@example.com",
+                BotCheck = 4
+            };
+
+            var context = new ValidationContext(model);
+            var results = new List<ValidationResult>();
+
+            // Act
+            var isValid = Validator.TryValidateObject(model, context, results, validateAllProperties: true);
+
+            // Assert
+            Assert.True(isValid);
         }
     }
 }
